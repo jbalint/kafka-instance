@@ -1,0 +1,35 @@
+// My Kafka instance. embeds the REST and WebSocket connectors
+
+apply plugin: "application"
+apply plugin: "java"
+
+ext {
+    confluentVersion = "3.2.1"
+    kafkaVersion = "0.10.2.1"
+    jettyVersion = "9.1.5.v20140505"
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compile "org.apache.kafka:kafka_2.11:$kafkaVersion"
+    compile "org.apache.kafka:kafka-clients:$kafkaVersion"
+    compile "org.apache.zookeeper:zookeeper:3.4.10"
+    // kafka-rest deps
+    compile "io.confluent:rest-utils:$confluentVersion"
+    compile "io.confluent:kafka-avro-serializer:$confluentVersion"
+    compile "io.confluent:kafka-json-serializer:$confluentVersion"
+    compile "io.confluent:kafka-rest:$confluentVersion"
+    // kafka-websocket deps
+    compile "org.eclipse.jetty:jetty-server:$jettyVersion"
+    compile "org.eclipse.jetty.websocket:javax-websocket-server-impl:$jettyVersion"
+    compile "javax.websocket:javax.websocket-api:1.0"
+    compile "com.google.guava:guava:16.0.1"
+    compile "com.google.code.gson:gson:2.2.4"
+    compile "us.b3k.kafka:kafka-websocket:0.8.2-SNAPSHOT"
+}
+
+mainClassName = "com.jbalint.kafka.KafkaInstance"
